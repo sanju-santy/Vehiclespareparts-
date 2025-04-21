@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vehicle Parts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .vehicle-select, .category-select {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .parts-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .part-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 250px;
+      margin: 20px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .part-card img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .back-link {
+      margin: 20px 0;
+      text-align: center;
+      display: inline-block;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .add-to-cart {
+      margin-top: 10px;
+      background-color: #333;
+      color: #fff;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-to-cart:hover {
+      background-color: #555;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Vehicle Parts</h1>
+  </header>
+
+  <div class="container">
+    <!-- Dropdown to select vehicle -->
+    <div class="vehicle-select">
+      <label for="vehicle-selector">Select a Vehicle:</label>
+      <select id="vehicle-selector">
+        <option value="">--Select Vehicle--</option>
+        <!-- Options will be dynamically added here -->
+      </select>
+    </div>
+
+    <!-- Dropdown to select category -->
+    <div class="category-select">
+      <label for="category-selector">Filter by Category:</label>
+      <select id="category-selector">
+        <option value="">--Select Category--</option>
+        <option value="Engine">Engine</option>
+        <option value="Brake">Brake</option>
+        <option value="Air Filter">Air Filter</option>
+        <!-- More categories can be added here -->
+      </select>
+    </div>
+
+    <a class="back-link" href="vehicle-models.html">Back to Models</a>
+    <h2 id="vehicle-name">All Vehicle Parts</h2>
+
+    <div class="parts-list" id="parts-list">
+      <!-- Parts list will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <script>
+    // Sample data for parts - add more vehicles and their parts here
+    const vehiclePartsData = {
+      "Maruti Swift": [
+        { name: "Engine Oil", category: "Engine", price: "₹1500", image: "https://via.placeholder.com/100" },
+        { name: "Brake Pads", category: "Brake", price: "₹2500", image: "https://via.placeholder.com/100" },
+        { name: "Air Filter", category: "Air Filter", price: "₹800", image: "https://via.placeholder.com/100" }
+      ],
+      "Tata Nexon": [
+        { name: "Engine Oil", category: "Engine", price: "₹1800", image: "https://via.placeholder.com/100" },
+        { name: "Brake Pads", category: "Brake", price: "₹2300", image: "https://via.placeholder.com/100" },
+        { name: "Air Filter", category: "Air Filter", price: "₹900", image: "https://via.placeholder.com/100" }
+      ],
+      "Hyundai Creta": [
+        { name: "Engine Oil", category: "Engine", price: "₹2000", image: "https://via.placeholder.com/100" },
+        { name: "Brake Pads", category: "Brake", price: "₹2800", image: "https://via.placeholder.com/100" },
+        { name: "Air Filter", category: "Air Filter", price: "₹950", image: "https://via.placeholder.com/100" }
+      ],
+      "Bajaj Pulsar": [
+        { name: "Engine Oil", category: "Engine", price: "₹1200", image: "https://via.placeholder.com/100" },
+        { name: "Brake Pads", category: "Brake", price: "₹2000", image: "https://via.placeholder.com/100" },
+        { name: "Air Filter", category: "Air Filter", price: "₹700", image: "https://via.placeholder.com/100" }
+      ],
+      // Add more vehicles and parts...
+    };
+
+    const vehicleSelector = document.getElementById("vehicle-selector");
+    const categorySelector = document.getElementById("category-selector");
+    const vehicleNameElement = document.getElementById("vehicle-name");
+    const partsList = document.getElementById("parts-list");
+
+    let cart = []; // Array to store the cart items
+
+    // Function to populate vehicle selector dropdown
+    function populateVehicleSelector() {
+      Object.keys(vehiclePartsData).forEach(vehicle => {
+        const option = document.createElement("option");
+        option.value = vehicle;
+        option.textContent = vehicle;
+        vehicleSelector.appendChild(option);
+      });
+    }
+
+    // Function to render parts for a selected vehicle and selected category
+    function renderParts(vehicle, category) {
+      partsList.innerHTML = ''; // Clear current parts list
+
+      let filteredParts = [];
+      if (vehicle) {
+        filteredParts = vehiclePartsData[vehicle];
+      } else {
+        Object.values(vehiclePartsData).forEach(parts => {
+          filteredParts = filteredParts.concat(parts);
+        });
+      }
+
+      if (category) {
+        filteredParts = filteredParts.filter(part => part.category === category);
+      }
+
+      if (filteredParts.length === 0) {
+        partsList.innerHTML = "<p>No parts available for the selected filters.</p>";
+        return;
+      }
+
+      filteredParts.forEach(part => {
+        const partCard = document.createElement('div');
+        partCard.classList.add('part-card');
+        partCard.innerHTML = `
+          <img src="${part.image}" alt="${part.name}">
+          <h3>${part.name}</h3>
+          <p>Price: ${part.price}</p>
+          <button class="add-to-cart" data-part-name="${part.name}" data-part-price="${part.price}">Add to Cart</button>
+        `;
+        partsList.appendChild(partCard);
+      });
+    }
+
+    // Event listener for vehicle selection change
+    vehicleSelector.addEventListener('change', (e) => {
+      const selectedVehicle = e.target.value;
+      const selectedCategory = categorySelector.value;
+      renderParts(selectedVehicle, selectedCategory); // Render parts based on selected vehicle and category
+    });
+
+    // Event listener for category selection change
+    categorySelector.addEventListener('change', (e) => {
+      const selectedCategory = e.target.value;
+      const selectedVehicle = vehicleSelector.value;
+      renderParts(selectedVehicle, selectedCategory); // Render parts based on selected category
+    });
+
+    // Event listener for "Add to Cart" button click
+    partsList.addEventListener('click', (e) => {
+      if (e.target && e.target.classList.contains('add-to-cart')) {
+        const partName = e.target.getAttribute('data-part-name');
+        const partPrice = e.target.getAttribute('data-part-price');
+        cart.push({ name: partName, price: partPrice });
+        alert(`${partName} has been added to the cart.`);
+      }
+    });
+
+    // Initialize the page
+    populateVehicleSelector();
+    renderParts(); // Display all parts initially
+  </script>
+
+</body>
+</html>

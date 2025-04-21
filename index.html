@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vehicle Spare Parts Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://c8.alamy.com/comp/2DHJP0R/a-shelf-wall-with-various-spare-parts-is-located-in-a-car-workshop-2DHJP0R.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 10px 0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+      margin: 10px 0 0;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      background-image: url('https://cdn.pixabay.com/photo/2017/01/06/19/15/auto-1957037_1280.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero-content input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      margin: 10px 0;
+    }
+
+    .hero-content button {
+      padding: 10px 20px;
+      background: #ff9900;
+      border: none;
+      cursor: pointer;
+    }
+
+    .products {
+      padding: 40px 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .products h2 {
+      text-align: center;
+    }
+
+    .product-card {
+      background-color: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 350px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .product-card button {
+      padding: 10px;
+      margin: 5px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .products .container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+
+      .product-card {
+        width: 30%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with Navigation -->
+  <header>
+    <div class="container">
+      <h1>Vehicle Spare Parts Store</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="brands.html">Brands</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Cart</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section with Background Image -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Find the Best Spare Parts for Your Vehicle</h2>
+      <p>Get high-quality parts with fast delivery and warranty</p>
+      <form>
+        <input type="text" placeholder="Search by part number, vehicle model..." required />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Featured Products Section -->
+  <section class="products">
+    <div class="container">
+      <h2>Featured Spare Parts</h2>
+
+      <div class="product-card">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2021/11/RC/YB/PG/101209222/maruti-suzuki-swift-brake-pads-500x500.jpg" alt="Brake Pads">
+        <h3>Brake Pads for Maruti Swift</h3>
+        <p>Price: ₹12,000</p>
+        <p>Rating: ⭐⭐⭐⭐</p>
+        <p>Condition: New</p>
+        <button>View Details</button>
+        <button>Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJzliUALk6Y_fNLwPloQ3mEwsUrfJjSRzigQ&s" alt="Engine Oil Filter">
+        <h3>Engine Oil Filter for Hyundai Creta</h3>
+        <p>Price: ₹2,500</p>
+        <p>Rating: ⭐⭐⭐⭐⭐</p>
+        <p>Condition: Refurbished</p>
+        <button>View Details</button>
+        <button>Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAogunTPwv--uYOlOIzS22yFuy2BE7QzPmag&s" alt="Transmission Parts">
+        <h3>Transmission Parts for Toyota Fortuner</h3>
+        <p>Price: ₹35,000</p>
+        <p>Rating: ⭐⭐⭐</p>
+        <p>Condition: New</p>
+        <button>View Details</button>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

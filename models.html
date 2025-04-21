@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vehicle Models</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .model-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .model-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 250px;
+      margin: 20px;
+      text-align: center;
+      padding: 20px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .model-card:hover {
+      transform: scale(1.05);
+    }
+
+    .model-card img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .model-card h3 {
+      margin: 10px 0 0;
+      font-size: 20px;
+    }
+
+    .model-card p {
+      color: #777;
+    }
+
+    .back-link {
+      margin: 20px 0;
+      text-align: center;
+      display: inline-block;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Vehicles by Brand</h1>
+  </header>
+
+  <div class="container">
+    <a class="back-link" href="brands.html">Back to Brands</a>
+    <h2 id="brand-title">Vehicle Models for Maruti Suzuki</h2>
+
+    <div class="model-grid" id="model-list">
+      <!-- Vehicle list will be dynamically inserted here based on the selected brand -->
+    </div>
+  </div>
+
+  <script>
+    // Get the URL parameters to identify the selected brand
+    const urlParams = new URLSearchParams(window.location.search);
+    const brand = urlParams.get('brand');
+    const brandTitle = document.getElementById('brand-title');
+    const modelList = document.getElementById('model-list');
+
+    // Set the brand title dynamically
+    brandTitle.textContent = `Vehicle Models for ${brand}`;
+
+    // Example models data - you can modify it with real data or connect to a database
+    const vehicleData = {
+      "Maruti Suzuki": [
+        { name: "Maruti Swift", year: 2023, image: "https://imgd.aeplcdn.com/370x208/n/cw/ec/159099/swift-exterior-right-front-three-quarter-31.jpeg?isig=0&q=80" },
+        { name: "Maruti Alto", year: 2022, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStuGPG5wcyZ3hWtssnnJrc-QhFvpdnGDmbDg&s" },
+        { name: "Maruti Baleno", year: 2021, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD1Px5JM5WzaUOijn6XIx1L8maIavNb6sedQ&s" }
+      ],
+      "Tata": [
+        { name: "Tata Nexon", year: 2023, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs6ICFyt6uzRjd3sSQLrDHkJQ-6gVIIjjFPg&s" },
+        { name: "Tata Harrier", year: 2022, image: "https://media.licdn.com/dms/image/v2/D4D12AQHSff-_bIyVgQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1697111077312?e=2147483647&v=beta&t=p52UI203gGAyIWII5XEa_R9Q5w5gO_kGud3S5eKRtcU" }
+      ],
+      "Mahindra": [
+        { name: "Mahindra XUV700", year: 2023, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRhV1Yb7oq1njjjUTB6nrrlfXsDY4OqYBaiA&s" },
+        { name: "Mahindra Thar", year: 2022, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2gj5gcJs0XhL0vwo2DsY3gpskJmPxKa859w&s" }
+      ],
+      "Hero": [
+        { name: "Hero Splendor", year: 2023, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj7G_k4eyPAKdfo7veCyMc4ssDoF7xa6WfVw&s" },
+        { name: "Hero Passion", year: 2022, image: "https://5.imimg.com/data5/XR/RB/TH/SELLER-4954/moon-yellow-500x500.png" }
+      ],
+      "TVS": [
+        { name: "TVS Apache", year: 2023, image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/49725/apache-200-right-side-view-2.png?isig=0" },
+        { name: "TVS Ntorq", year: 2022, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOucw-pq15OlMleFW4Cxm9rXQma6h48YgqVg&s" }
+      ],
+      "Bajaj": [
+        { name: "Bajaj Pulsar", year: 2023, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTicoVlVoZl0qHKMTF304kWujjjLnaU-GTjYw&s" },
+        { name: "Bajaj Avenger", year: 2022, image: "https://upload.wikimedia.org/wikipedia/commons/2/29/Bajaj_logo.svg" }
+      ],
+      "Hyundai": [
+        { name: "Hyundai Creta", year: 2023, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMil2VyIW9XU2gqjccMXyJGIOWsgKLbNy9JQ&s" },
+        { name: "Hyundai Verna", year: 2022, image: "https://imgd.aeplcdn.com/1056x594/n/bynneab_1652027.jpg?q=80" }
+      ],
+      "Royal Enfield": [
+        { name: "Royal Enfield Classic 350", year: 2023, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiHG_WMQTZSpf3y2gItnczOTm0jIGjjGe5uA&s" },
+        { name: "Royal Enfield Bullet", year: 2022, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQwsQGvilc7vNtJ_iN0FFqdAC6hZhh8kGrZQ&s" }
+      ],
+      "Ashok Leyland": [
+        { name: "Ashok Leyland Dost", year: 2023, image: "https://etimg.etb2bimg.com/photo/78104822.cms" },
+        { name: "Ashok Leyland Captain", year: 2022, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQzc9eCacGysACab1cuQy8DDHdsj4z9TUzxA&s" }
+      ],
+    };
+
+    // Render the vehicle models based on the brand selected
+    function renderModels() {
+      const models = vehicleData[brand];
+
+      if (models) {
+        models.forEach(model => {
+          const modelCard = document.createElement('div');
+          modelCard.classList.add('model-card');
+          modelCard.innerHTML = `
+            <img src="${model.image}" alt="${model.name}">
+            <h3>${model.name}</h3>
+            <p>Year: ${model.year}</p>
+            <a href="vehicle-parts.html?brand=${brand}&model=${model.name}" class="model-link">View Parts</a>
+          `;
+          modelList.appendChild(modelCard);
+        });
+      } else {
+        modelList.innerHTML = `<p>No models available for this brand.</p>`;
+      }
+    }
+
+    renderModels(); // Call the function to render models for the selected brand
+  </script>
+
+</body>
+</html>
